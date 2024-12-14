@@ -31,9 +31,6 @@ while True:
     temperature = temperature / count
     huminity = huminity / count
 
-    with open(r"/home/seo/projects/raspitemperaturemonitor/data.csv", "w") as f:
-        f.write(f"{temperature},{huminity}")
-
     add_data(temperature, huminity)
 
     print("I am running!")

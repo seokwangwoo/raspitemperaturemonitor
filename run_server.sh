@@ -12,5 +12,5 @@ fi
 eval "$(pyenv init -)"
 
 cd $HOME/projects/raspitemperaturemonitor
-poetry run python -m raspitemperaturemonitor.raspitemperaturemonitor
+poetry run streamlit run app.py
 
