@@ -30,6 +30,8 @@ rpi-lgpio = "^0.6"
 pigpio = "^1.78"
 gpiozero = "^2.0.1"
 streamlit = "^1.40.2"
+sqlalchemy = "^2.0.36"
+streamlit-echarts = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 bumpversion = "*"

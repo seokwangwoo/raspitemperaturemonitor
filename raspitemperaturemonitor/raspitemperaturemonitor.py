@@ -1,7 +1,9 @@
 """Main module."""
+
 import time
 import adafruit_dht
 import board
+from raspitemperaturemonitor.db import add_data
 
 dht_device = adafruit_dht.DHT22(board.D18)
 
@@ -31,6 +33,8 @@ while True:
 
     with open(r"/home/seo/projects/raspitemperaturemonitor/data.csv", "w") as f:
         f.write(f"{temperature},{huminity}")
+
+    add_data(temperature, huminity)
 
     print("I am running!")
 
