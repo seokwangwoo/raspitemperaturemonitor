@@ -1,15 +1,37 @@
 """Main module."""
-
 import time
 import adafruit_dht
 import board
-from sqlite3wrapper.sqlite3wrapper import DatabaseManager
 
 dht_device = adafruit_dht.DHT22(board.D18)
 
-while True:
-    temperature = dht_device.temperature
-    huminity = dht_device.humidity
+print("Start monitoring")
 
-    print(f"Temperature:{temperature}, Huminity:{huminity}")
-    time.sleep(5)
+while True:
+    temperature = 0
+    huminity = 0
+    count = 0
+
+    for i in range(5):
+        try:
+            temperature += float(dht_device.temperature)
+            huminity += float(dht_device.humidity)
+            count += 1
+        except Exception as e:
+            print(e)
+            continue
+
+        time.sleep(1)
+
+    if count == 0:
+        continue
+
+    temperature = temperature / count
+    huminity = huminity / count
+
+    with open(r"/home/seo/projects/raspitemperaturemonitor/data.csv", "w") as f:
+        f.write(f"{temperature},{huminity}")
+
+    print("I am running!")
+
+dht_device.exit()
