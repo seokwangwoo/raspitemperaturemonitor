@@ -58,13 +58,13 @@ if dataset:
             {
                 "name": "Temperature",
                 "type": "line",
-                "data": [data.temperature for data in dataset],
+                "data": [round(data.temperature, 1) for data in dataset],
                 "colorBy": "series",
             },
             {
                 "name": "Huminity",
                 "type": "line",
-                "data": [data.huminity for data in dataset],
+                "data": [round(data.huminity, 1) for data in dataset],
                 "colorBy": "series",
             },
         ],
