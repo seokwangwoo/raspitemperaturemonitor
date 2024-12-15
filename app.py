@@ -1,9 +1,10 @@
 import streamlit as st
+from datetime import datetime
 from streamlit_echarts import st_echarts
 from raspitemperaturemonitor.db import get_datetime_range, get_last_data, get_data
 
 last_data = get_last_data()
-datetime = last_data.datetime.strftime("%Y-%m-%d %H:%M:%S")
+updated_at = last_data.datetime.strftime("%Y-%m-%d %H:%M:%S")
 temperature = round(last_data.temperature, 1)
 huminity = round(last_data.huminity, 1)
 
@@ -20,7 +21,7 @@ with col2:
         st.subheader(f"Huminity💧")
         st.header(f"{huminity} %")
 
-st.text(f"Updated at {datetime}")
+st.text(f"Updated at {updated_at}")
 st.divider()
 
 st.title("History")
@@ -35,6 +36,9 @@ with st.sidebar:
         if len(dataset) > 50:
             dataset = dataset[-50:]
     else:
+        end_datetime = datetime(
+            end_datetime.year, end_datetime.month, end_datetime.day, 23, 59, 59
+        )
         dataset = get_datetime_range(start_datetime, end_datetime)
 
 if dataset:
