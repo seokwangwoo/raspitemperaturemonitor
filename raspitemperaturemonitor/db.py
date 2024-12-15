@@ -53,3 +53,25 @@ def get_last_data():
     data = db.query(MonitoringData).order_by(MonitoringData.id.desc()).first()
     db.close()
     return data
+
+
+def get_datetime_range(
+    start_datetime: datetime = datetime(1970, 1, 1),
+    end_datetime: datetime = datetime.now(),
+):
+    if not start_datetime:
+        start_datetime = datetime(1970, 1, 1)
+    if not end_datetime:
+        end_datetime = datetime.now()
+
+    db = SessionLocal()
+    data = (
+        db.query(MonitoringData)
+        .filter(
+            MonitoringData.datetime >= start_datetime,
+            MonitoringData.datetime <= end_datetime,
+        )
+        .all()
+    )
+    db.close()
+    return data
