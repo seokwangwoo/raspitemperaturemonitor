@@ -1,7 +1,12 @@
 import streamlit as st
 from datetime import datetime
 from streamlit_echarts import st_echarts
+from streamlit_theme import st_theme
 from raspitemperaturemonitor.db import get_datetime_range, get_last_data, get_data
+
+theme = st_theme()
+if not theme:
+    st.stop()
 
 last_data = get_last_data()
 updated_at = last_data.datetime.strftime("%Y-%m-%d %H:%M:%S")
@@ -44,15 +49,31 @@ with st.sidebar:
 if dataset:
     options = {
         "tooltip": {"trigger": "axis"},
-        "legend": {"data": ["Temperature", "Huminity"]},
+        "legend": {
+            "data": ["Temperature", "Huminity"],
+            "textStyle": {
+                "color": theme["textColor"],
+                "fontFamily": theme["font"],
+                "fontSize": 14,
+            },
+        },
         "xAxis": {
             "type": "category",
             "boundaryGap": False,
             "data": [data.datetime.strftime("%Y-%m-%d %H:%M:%S") for data in dataset],
+            "axisLine": {
+                "lineStyle": {"color": theme["textColor"]},
+            },
         },
         "yAxis": {
             "type": "value",
             "alignTicks": True,
+            "splitLine": {
+                "show": True,
+                "lineStyle": {
+                    "color": theme["borderColor"],
+                },
+            },
         },
         "series": [
             {

@@ -2210,6 +2210,20 @@ reference = "HEAD"
 resolved_reference = "66de314db38b6163dd4a85d6ab020567a81fa75c"
 
 [[package]]
+name = "st-theme"
+version = "1.2.3"
+description = "A component that returns the active theme of the Streamlit app."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "st-theme-1.2.3.tar.gz", hash = "sha256:ca97aece1a48ded6e83fd742c27cb0851e1bce2100ab4b6c37c7b6e003b65b42"},
+    {file = "st_theme-1.2.3-py3-none-any.whl", hash = "sha256:0a54d9817dd5f8a6d7b0d071b25ae72eacf536c63a5fb97374923938021b1389"},
+]
+
+[package.dependencies]
+streamlit = ">=1.33"
+
+[[package]]
 name = "streamlit"
 version = "1.41.1"
 description = "A faster way to build and share data apps"
@@ -2467,4 +2481,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<4"
-content-hash = "74328630ef12a3146a937e124fc79ddfd8bbccae9bc98b0bf97363ce15fc95c0"
+content-hash = "9d8a893fb8cd2db18b3707e9618ae267ba456660db8fd703fd3ff62b1cbbe889"
