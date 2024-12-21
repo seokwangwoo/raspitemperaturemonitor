@@ -52,7 +52,7 @@ if dataset:
     options = {
         "tooltip": {"trigger": "axis"},
         "legend": {
-            "data": ["Temperature", "Huminity"],
+            "data": ["Temperature(°C)", "Huminity(%)"],
             "textStyle": {
                 "color": theme["textColor"],
                 "fontFamily": theme["font"],
@@ -79,13 +79,13 @@ if dataset:
         },
         "series": [
             {
-                "name": "Temperature",
+                "name": "Temperature(°C)",
                 "type": "line",
                 "data": [round(data.temperature, 1) for data in dataset],
                 "colorBy": "series",
             },
             {
-                "name": "Huminity",
+                "name": "Huminity(%)",
                 "type": "line",
                 "data": [round(data.huminity, 1) for data in dataset],
                 "colorBy": "series",
