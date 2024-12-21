@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 from streamlit_echarts import st_echarts
 from streamlit_theme import st_theme
-from raspitemperaturemonitor.db import get_datetime_range, get_last_data, get_data
+from raspitemperaturemonitor.db import get_datetime_range, get_last_data
 
 theme = st_theme()
 if not theme:
@@ -37,14 +37,16 @@ with st.sidebar:
     end_datetime = st.date_input("End date", value=None)
 
     if not start_datetime and not end_datetime:
-        dataset = get_data()
-        if len(dataset) > 50:
-            dataset = dataset[-50:]
-    else:
-        end_datetime = datetime(
-            end_datetime.year, end_datetime.month, end_datetime.day, 23, 59, 59
-        )
+        today = datetime.today()
+        start_datetime = datetime(today.year, today.month, today.day, 0, 0, 0)
+        end_datetime = datetime(today.year, today.month, today.day, 23, 59, 59)
         dataset = get_datetime_range(start_datetime, end_datetime)
+    else:
+        if end_datetime:
+            end_datetime = datetime(
+                end_datetime.year, end_datetime.month, end_datetime.day, 23, 59, 59
+            )
+            dataset = get_datetime_range(start_datetime, end_datetime)
 
 if dataset:
     options = {
